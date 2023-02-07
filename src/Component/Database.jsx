@@ -13,6 +13,7 @@ export default function Database() {
           div.push({ ...doc.data(), id: doc.id });
         });
         console.log(div);
+        
       });
       return () => unsub();
     } catch (err) {
