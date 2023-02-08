@@ -21,12 +21,10 @@ export default function Addservice() {
       const newse = newserivce;
       const colref = collection(db, main);
       const docRef = await setDoc(doc(colref, newse), {
-        mainservice,
-        newserivce,
         documents,
       });
       console.log("Sucess fully Added", docRef);
-      nav("/Sucesspage");
+      nav("/Dash/Sucesspage");
     } catch (e) {
       console.error("Error adding document: ", e);
     }

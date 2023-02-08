@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   doc,
@@ -13,9 +13,10 @@ export default function Updateservice() {
   const nav = useNavigate();
   const [mainservice, setAddmain] = useState("સેવા પસંદ કરો");
   const [newserivce, setAddnew] = useState("સેવા પસંદ કરો");
-  const [documents, setAdddocumnet] = useState(" ");
+  const [data, setAdddocumnet] = useState(" ");
+  
 
-  const updatedata = async (e) => {
+  const changedata = async (e) => {
     try {
       const main = mainservice;
 
@@ -58,13 +59,24 @@ export default function Updateservice() {
 
         console.log(id);
       });
-
-
-
-
-      
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const updatedata = async (e) => {
+    e.preventDefault();
+    try {
+      const main = mainservice;
+      const newse = newserivce;
+      const colref = collection(db, main);
+      const docRef = await setDoc(doc(colref, newse), {
+        documents: data,
+      });
+      console.log("Sucess fully Added", docRef);
+      nav("/Dash/Updateservice");
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
   };
 
@@ -101,7 +113,7 @@ export default function Updateservice() {
                 defaultValue={mainservice}
                 onChange={(e) => {
                   setAddmain(e.target.value);
-                  updatedata();
+                  changedata();
                 }}
               >
                 <option selected>સેવા પસંદ કરો</option>
@@ -186,7 +198,7 @@ export default function Updateservice() {
                     id="exampleFormControlTextarea1"
                     rows="3"
                     placeholder="Your message"
-                    value={documents}
+                    value={data}
                     onChange={(e) => {
                       setAdddocumnet(e.target.value);
                     }}
