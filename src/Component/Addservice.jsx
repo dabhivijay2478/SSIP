@@ -6,7 +6,7 @@ export default function Addservice() {
   const nav = useNavigate();
   const [mainservice, setAddmain] = useState("સેવા પસંદ કરો");
   const [newserivce, setAddnew] = useState("");
-  const [documents, setAdddocumnet] = useState(" ");
+  const [documents, setAdddocumnet] = useState("");
   const pushdata = async (e) => {
     e.preventDefault();
 
@@ -155,7 +155,7 @@ export default function Addservice() {
                 onClick={pushdata}
                 className="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
               >
-                Button Text
+              Add
               </button>
             </div>
           </div>

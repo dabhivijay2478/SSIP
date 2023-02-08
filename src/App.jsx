@@ -9,6 +9,7 @@ import Updateservice from "./Component/Updateservice";
 import Database from "./Component/Database";
 import Sucesspage from "./Component/Sucesspage";
 import Data from "./Component/Data2";
+import Errorpage from "./Component/Errorpage";
 // import PrivateRoute from "./ProtectedRoute";
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route exact path="Database" element={<Database />} />
         </Route>
         <Route exact path="/Sucesspage" element={<Sucesspage />} />
-        <Route exact path="*" element={<Sucesspage />} />
+        <Route exact path="*" element={<Errorpage />} />
      
         </Routes>
     </>

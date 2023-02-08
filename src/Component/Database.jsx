@@ -1,28 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, setDoc, doc } from "firebase/firestore";
 import { db } from "../Firebase";
-import { async } from "@firebase/util";
+import { Link, useNavigate } from "react-router-dom";
+
 export default function Database() {
+  const nav = useNavigate();
   const [data, setData] = useState([]);
   const [mainservice, setAddmain] = useState("સેવા પસંદ કરો");
   const [newserivce, setAddnew] = useState("");
   const [documents, setAdddocumnet] = useState("");
-  // const fetchdata = async () => {
-  //   try {
-  //     const main = mainservice;
-  //     const q = query(collection(db, main));
-  //     const unsub = await onSnapshot(q, (querySnapshot) => {
-  //       let div = [];
-  //       querySnapshot.forEach((doc) => {
-  //         div.push({ ...doc.data(), id: doc.id });
-  //       });
-  //       console.log(div);
-  //     });
-  //     return () => unsub();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const [dataIdToBeUpdated, setDataIdToBeUpdated] = useState("");
+
   const main = mainservice;
   useEffect(() => {
     const q = query(collection(db, main));
@@ -39,19 +27,18 @@ export default function Database() {
     e.preventDefault();
     try {
       const main = mainservice;
-      const newse = newserivce;
+      const Sub = dataIdToBeUpdated;
       const colref = collection(db, main);
-      const docRef = await setDoc(doc(colref, newse), {
+      const docRef = await setDoc(doc(colref, Sub), {
         documents,
       });
-      console.log("Sucess fully Added", docRef);
+      console.log("Sucess fully Update", docRef);
       nav("/Dash");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-    setUpdatedCustomerPassword("");
-    setUpdatedCustomerName("");
-    setDataIdToBeUpdated("");
+
+    setAdddocumnet("");
   };
 
   return (
@@ -121,7 +108,7 @@ export default function Database() {
           <div
             class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
             id="exampleModalCenteredScrollable"
-            tabindex="-1"
+            tabIndex="-1"
             aria-labelledby="exampleModalCenteredScrollable"
             aria-modal="true"
             role="dialog"
@@ -130,7 +117,7 @@ export default function Database() {
               <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                 <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                   <span className="text-3xl flex justify-center font-semibold  py-1 px-2  rounded text-violet-600  uppercase last:mr-0 mr-1">
-                    Addservice
+                    Update
                   </span>
                   <button
                     type="button"
@@ -144,8 +131,34 @@ export default function Database() {
                     <div className="mb-3 xl:w-96">
                       <div>
                         <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                          Enter The New Service
+                          New Service
                         </span>
+                        <div>
+                          <input
+                            type="text"
+                            placeholder="Enter The Sub Service"
+                            className="form-input mb-3
+                                    appearance-none
+                                    block
+                                    w-full
+                                    px-4
+                                    py-2
+                                    text-xl
+                                    font-normal
+                                    text-gray-700
+                                    bg-white bg-clip-padding bg-no-repeat
+                                    border border-solid border-gray-300
+                                    rounded
+                                    transition
+                                    ease-in-out
+                                    m-0
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            value={mainservice}
+                            onChange={(e) => {
+                              setAddnew(e.target.value);
+                            }}
+                          />
+                        </div>
                       </div>
                       <div>
                         <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
@@ -172,7 +185,7 @@ export default function Database() {
                                       ease-in-out
                                       m-0
                                       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            value={newserivce}
+                            value={dataIdToBeUpdated}
                             onChange={(e) => {
                               setAddnew(e.target.value);
                             }}
@@ -227,9 +240,10 @@ export default function Database() {
                   </button>
                   <button
                     type="button"
+                    onClick={updateData}
                     class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                   >
-                    Save changes
+                    Update Data
                   </button>
                 </div>
               </div>
@@ -304,8 +318,9 @@ export default function Database() {
                               class="inline-block  px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                               data-bs-toggle="modal"
                               data-bs-target="#exampleModalCenteredScrollable"
-                              onClick={() => {
-                                newserivce(id);
+                              onClick={(e) => {
+                                console.log(item.id);
+                                setDataIdToBeUpdated(item.id);
                               }}
                             >
                               Update

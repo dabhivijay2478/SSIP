@@ -55,6 +55,51 @@ body {
   text-decoration: none;
 }
 
+body {
+  margin: 0 20px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: rgb(0, 200, 255);
+  height: 60px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+  z-index: 10;
+  
+  /* for positioning text, links, etc */
+  display: flex;
+  align-items: center;
+}
+
+.flex-container {
+  display: flex;
+}
+
+section {
+  position: fixed;
+  top: 80px; /* the height of the header (60px) + its bottom margin (20px) */
+
+  padding: 20px;
+  width: 20%;
+  height: 500px;
+  margin: top 20px; ;
+  margin-bottom: 20px;
+}
+
+main {
+  padding-left: 20px;
+  flex-grow: 1;
+}
+
+.content {
+  background: rgb(200, 200, 200);
+  height: 300px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
 @layer components {
   .sidebar {
     transition: all .4s ease-in-out;
