@@ -5,12 +5,12 @@ import { Link, Outlet, NavLink } from "react-router-dom";
 export default function Dash() {
   return (
     <>
-      <div class="flex">
+      <div className="flex">
         <section
-          class=" text-gray-100 p-4 sticky flex-shrink-0"
+          className=" text-gray-100 p-4 sticky flex-shrink-0"
           id="left-side-panel"
         >
-          <div class="flex justify-center">
+          <div className="flex justify-center">
             <div className="sd-body">
               <ul>
                 <li>
@@ -35,14 +35,14 @@ export default function Dash() {
                     to="/Dash/Database"
                     className="sd-link  bg-white dark:hover:bg-green-400 dark:hover:text-blue-900 text-gray-700"
                   >
-                  Database
+                    Database
                   </NavLink>
                 </li>
-   </ul>
+              </ul>
             </div>
           </div>
         </section>
-        <div class=" text-white flex-grow p-4" id="main-content">
+        <div className=" text-white flex-grow p-4" id="main-content">
           <Outlet />
         </div>
       </div>

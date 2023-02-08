@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, query, onSnapshot, setDoc, doc } from "firebase/firestore";
 import { db } from "../Firebase";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Database() {
   const nav = useNavigate();
@@ -12,6 +12,7 @@ export default function Database() {
   const [dataIdToBeUpdated, setDataIdToBeUpdated] = useState("");
 
   const main = mainservice;
+
   useEffect(() => {
     const q = query(collection(db, main));
     onSnapshot(q, (querySnapshot) => {
@@ -22,7 +23,6 @@ export default function Database() {
       setData(table);
     });
   }, []);
-
   const updateData = async (e) => {
     e.preventDefault();
     try {
@@ -33,12 +33,13 @@ export default function Database() {
         documents,
       });
       console.log("Sucess fully Update", docRef);
-      nav("/Dash");
+      nav("/Dash/Home");
+      const backdrop = document.getElementsByClassName("modal-backdrop");
+
+      setAdddocumnet("");
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-
-    setAdddocumnet("");
   };
 
   return (
@@ -106,59 +107,58 @@ export default function Database() {
         </div>
         <div>
           <div
-            class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+            className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
             id="exampleModalCenteredScrollable"
             tabIndex="-1"
             aria-labelledby="exampleModalCenteredScrollable"
             aria-modal="true"
             role="dialog"
           >
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
-              <div class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                <div class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+              <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                   <span className="text-3xl flex justify-center font-semibold  py-1 px-2  rounded text-violet-600  uppercase last:mr-0 mr-1">
                     Update
                   </span>
                   <button
                     type="button"
-                    class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+                    className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body relative p-4">
+                <div className="modal-body relative p-4">
                   <div className="flex justify-center">
                     <div className="mb-3 xl:w-96">
                       <div>
                         <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                          New Service
+                          Enter The New Service
                         </span>
-                        <div>
-                          <input
-                            type="text"
-                            placeholder="Enter The Sub Service"
-                            className="form-input mb-3
-                                    appearance-none
-                                    block
-                                    w-full
-                                    px-4
-                                    py-2
-                                    text-xl
-                                    font-normal
-                                    text-gray-700
-                                    bg-white bg-clip-padding bg-no-repeat
-                                    border border-solid border-gray-300
-                                    rounded
-                                    transition
-                                    ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                            value={mainservice}
-                            onChange={(e) => {
-                              setAddnew(e.target.value);
-                            }}
-                          />
-                        </div>
+                        <input
+                          type="text"
+                          id="Sub Service"
+                          placeholder="Enter The Sub Service"
+                          className="form-input mb-3
+                    appearance-none
+                    block
+                    w-full
+                    px-4
+                    py-2
+                    text-xl
+                    font-normal
+                    text-gray-700
+                    bg-white bg-clip-padding bg-no-repeat
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          value={mainservice}
+                          onChange={(e) => {
+                            setAddnew(e.target.value);
+                          }}
+                        />
                       </div>
                       <div>
                         <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
@@ -170,21 +170,21 @@ export default function Database() {
                             id="Sub Service"
                             placeholder="Enter The Sub Service"
                             className="form-input mb-3
-                                      appearance-none
-                                      block
-                                      w-full
-                                      px-4
-                                      py-2
-                                      text-xl
-                                      font-normal
-                                      text-gray-700
-                                      bg-white bg-clip-padding bg-no-repeat
-                                      border border-solid border-gray-300
-                                      rounded
-                                      transition
-                                      ease-in-out
-                                      m-0
-                                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        appearance-none
+                        block
+                        w-full
+                        px-4
+                        py-2
+                        text-xl
+                        font-normal
+                        text-gray-700
+                        bg-white bg-clip-padding bg-no-repeat
+                        border border-solid border-gray-300
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             value={dataIdToBeUpdated}
                             onChange={(e) => {
                               setAddnew(e.target.value);
@@ -230,10 +230,12 @@ export default function Database() {
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                   <button
                     type="button"
-                    class="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+                    id="closemodel"
+                    name="closemodel"
+                    className="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
                     data-bs-dismiss="modal"
                   >
                     Close
@@ -241,9 +243,10 @@ export default function Database() {
                   <button
                     type="button"
                     onClick={updateData}
-                    class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
+                    data-bs-dismiss="modal"
+                    className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
                   >
-                    Update Data
+                    Update
                   </button>
                 </div>
               </div>
@@ -251,28 +254,28 @@ export default function Database() {
           </div>
         </div>
         <div>
-          <div class="flex flex-col">
-            <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <div class="overflow-hidden">
-                  <table class="min-w-full">
-                    <thead class="border-b">
+          <div className="flex flex-col">
+            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <div className="overflow-hidden">
+                  <table className="min-w-full">
+                    <thead className="border-b">
                       <tr>
                         <th
                           scope="col"
-                          class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                         >
                           ID
                         </th>
                         <th
                           scope="col"
-                          class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                         >
                           Data
                         </th>
                         <th
                           scope="col"
-                          class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                         >
                           Action
                         </th>
@@ -280,15 +283,15 @@ export default function Database() {
                     </thead>
                     <tbody>
                       {data.map((item) => (
-                        <tr class="border-b" key={item.id}>
-                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <tr className="border-b" key={item.id}>
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             {item.id}
                           </td>
-                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <div class="flex justify-center">
-                              <div class="mb-3 xl:w-96">
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <div className="flex justify-center">
+                              <div className="mb-3 xl:w-96">
                                 <textarea
-                                  class="
+                                  className="
                           form-control
                           block
                           w-full
@@ -312,16 +315,16 @@ export default function Database() {
                               </div>
                             </div>
                           </td>
-                          <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                             <button
                               type="button"
-                              class="inline-block  px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                              onClick={(e) => {
+                                setDataIdToBeUpdated(item.id);
+                                setAdddocumnet(item.documents);
+                              }}
+                              className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                               data-bs-toggle="modal"
                               data-bs-target="#exampleModalCenteredScrollable"
-                              onClick={(e) => {
-                                console.log(item.id);
-                                setDataIdToBeUpdated(item.id);
-                              }}
                             >
                               Update
                             </button>
