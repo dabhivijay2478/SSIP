@@ -1,5 +1,5 @@
 import React from "react";
-import Swiper from "./Swipe";
+
 
 export default function Home() {
   return (

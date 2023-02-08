@@ -15,14 +15,15 @@ export default function Database() {
 
   useEffect(() => {
     const q = query(collection(db, main));
-    onSnapshot(q, (querySnapshot) => {
+    const data = onSnapshot(q, (querySnapshot) => {
       const table = [];
       querySnapshot.forEach((doc) => {
         table.push({ ...doc.data(), id: doc.id });
       });
       setData(table);
     });
-  }, []);
+    return data;
+  }, [data]);
   const updateData = async (e) => {
     e.preventDefault();
     try {
