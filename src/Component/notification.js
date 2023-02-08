@@ -1,13 +1,38 @@
-var {} =require('googleapis')
-var express =require('express')
-var app=express.app()
+var { google } = require("googleapis");
+var express = require("express");
+const { response, json } = require("express");
+var app = express();
 
 app.use(express.json());
 
-app.get("/getAccessToken", (req, res) => {
-  getAccessToken().then(function (accessToken) {
-    console.log(accessToken);
-  });
+app.get("/getAccessToken", async (req, res) => {
+  const accessToken = await getAccessToken();
+
+  console.log(accessToken);
+  const mesg = await fetch(
+    "https://fcm.googleapis.com/v1/projects/test-46415/messages:send",
+    {
+      method: "POST",
+      headers: {
+        'Authorization': 'Bearer ' + accessToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: {
+          topic: "Notify",
+          notification: {
+            title: "Hello User",
+            body: "This is Notification From Jan Seva Kendra App",
+          },
+          data: {
+            story_id: "story_12345",
+          },
+        },
+      }),
+    }
+  );
+  console.log(mesg);
+  res.send("Done");
 });
 var MESSAGING_SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
 var SCOPES = [MESSAGING_SCOPE];
@@ -31,3 +56,7 @@ function getAccessToken() {
     });
   });
 }
+
+app.listen(3000, () => {
+  console.log("App listening on port 3000!");
+});

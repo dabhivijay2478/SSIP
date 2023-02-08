@@ -10,6 +10,7 @@ export default function Addservice() {
   const pushdata = async (e) => {
     e.preventDefault();
     const response = await fetch("/gettoken");
+    console.log(response);
     try {
       const main = mainservice;
       const newse = newserivce;
