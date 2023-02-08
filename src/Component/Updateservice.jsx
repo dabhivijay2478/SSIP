@@ -14,7 +14,6 @@ export default function Updateservice() {
   const [mainservice, setAddmain] = useState("સેવા પસંદ કરો");
   const [newserivce, setAddnew] = useState("સેવા પસંદ કરો");
   const [data, setAdddocumnet] = useState(" ");
-  
 
   const changedata = async (e) => {
     try {
@@ -86,14 +85,14 @@ export default function Updateservice() {
         Updateservice
       </span>
       <div className="max-w-screen-xl   mt-10 mb-10 px-8  gap-8 grid-cols-1 md:grid-cols-2 flex justify-center py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
-        <div class="flex justify-center">
-          <div class="mb-3 xl:w-96">
+        <div className="flex justify-center">
+          <div className="mb-3 xl:w-96">
             <div>
               <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
                 Enter The New Service
               </span>
               <select
-                class="form-select form-select-lg mb-3
+                className="form-select form-select-lg mb-3
                                 appearance-none
                                 block
                                 w-full
@@ -110,7 +109,7 @@ export default function Updateservice() {
                                 m-0
                                 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label=".form-select-lg example"
-                defaultValue={mainservice}
+                value={mainservice}
                 onChange={(e) => {
                   setAddmain(e.target.value);
                   changedata();
@@ -145,7 +144,7 @@ export default function Updateservice() {
                 Select The Sub Service
               </span>
               <select
-                class="form-select form-select-lg mb-3
+                className="form-select form-select-lg mb-3
                           appearance-none
                           block
                           w-full
@@ -163,7 +162,7 @@ export default function Updateservice() {
                           focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label=".form-select-lg example"
                 id="updatesub"
-                value={newserivce}
+                defaultValue={newserivce}
                 onChange={(e) => {
                   setAddnew(e.target.value);
                 }}
@@ -172,13 +171,13 @@ export default function Updateservice() {
               </select>
             </div>
             <div>
-              <div class="flex justify-center">
-                <div class="mb-3 xl:w-96">
+              <div className="flex justify-center">
+                <div className="mb-3 xl:w-96">
                   <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
                     Document's
                   </span>
                   <textarea
-                    class="
+                    className="
                                     form-control
                                     block
                                     w-full
@@ -198,7 +197,7 @@ export default function Updateservice() {
                     id="exampleFormControlTextarea1"
                     rows="3"
                     placeholder="Your message"
-                    value={data}
+                    Value={data}
                     onChange={(e) => {
                       setAdddocumnet(e.target.value);
                     }}
@@ -209,7 +208,7 @@ export default function Updateservice() {
             <div>
               <button
                 onClick={updatedata}
-                class="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                className="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
               >
                 Button Text
               </button>
