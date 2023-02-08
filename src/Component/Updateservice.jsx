@@ -1,35 +1,70 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { doc, updateDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  setDoc,
+  query,
+  collection,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../Firebase";
 export default function Updateservice() {
   const nav = useNavigate();
   const [mainservice, setAddmain] = useState("સેવા પસંદ કરો");
-  const [newserivce, setAddnew] = useState(" ");
+  const [newserivce, setAddnew] = useState("સેવા પસંદ કરો");
   const [documents, setAdddocumnet] = useState(" ");
 
   const updatedata = async (e) => {
-    e.preventDefault();
     try {
       const main = mainservice;
-      const newse = newserivce;
 
-      const q = query(collection(db, main));
-      const unsub = await onSnapshot(q, (querySnapshot) => {
-        let div = [];
-        querySnapshot.forEach((doc) => {
-          div.push({ ...doc.data(), id: doc.id });
+      const colRef2 = collection(db, main);
+      onSnapshot(colRef2, (snapshot) => {
+        let user = [];
+        snapshot.docs.forEach((doc) => {
+          user.push({ ...doc.data(), id: doc.id });
         });
-        console.log(div);
-        return unsub;
+        console.log(user);
       });
-      const updat = await setDoc(doc(db, main, newse), {
-        documents,
+      onSnapshot(colRef2, (snapshot) => {
+        let id = [];
+
+        snapshot.docs.forEach((doc) => {
+          id.push(doc.id);
+          function select_default(my_option, all_options, dropdown_id) {
+            var temp = "";
+            for (var i = 0; i < all_options.length; i++) {
+              if (my_option == all_options[i]) {
+                temp +=
+                  "<option value='" +
+                  all_options[i] +
+                  "' selected>" +
+                  all_options[i] +
+                  "</option>";
+              } else {
+                temp +=
+                  "<option value='" +
+                  all_options[i] +
+                  "'>" +
+                  all_options[i] +
+                  "</option>";
+              }
+            }
+            document.getElementById(dropdown_id).innerHTML = temp;
+          }
+          select_default("HTML", id, "updatesub");
+        });
+
+        console.log(id);
       });
-      console.log(updat);
-      console.log("scuess");
-    } catch (e) {
-      console.error("Error Fetch document: ", e);
+
+
+
+
+      
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -47,25 +82,26 @@ export default function Updateservice() {
               </span>
               <select
                 class="form-select form-select-lg mb-3
-      appearance-none
-      block
-      w-full
-      px-4
-      py-2
-      text-xl
-      font-normal
-      text-gray-700
-      bg-white bg-clip-padding bg-no-repeat
-      border border-solid border-gray-300
-      rounded
-      transition
-      ease-in-out
-      m-0
-      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                appearance-none
+                                block
+                                w-full
+                                px-4
+                                py-2
+                                text-xl
+                                font-normal
+                                text-gray-700
+                                bg-white bg-clip-padding bg-no-repeat
+                                border border-solid border-gray-300
+                                rounded
+                                transition
+                                ease-in-out
+                                m-0
+                                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label=".form-select-lg example"
                 defaultValue={mainservice}
                 onChange={(e) => {
                   setAddmain(e.target.value);
+                  updatedata();
                 }}
               >
                 <option selected>સેવા પસંદ કરો</option>
@@ -98,49 +134,29 @@ export default function Updateservice() {
               </span>
               <select
                 class="form-select form-select-lg mb-3
-    appearance-none
-    block
-    w-full
-    px-4
-    py-2
-    text-xl
-    font-normal
-    text-gray-700
-    bg-white bg-clip-padding bg-no-repeat
-    border border-solid border-gray-300
-    rounded
-    transition
-    ease-in-out
-    m-0
-    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                          appearance-none
+                          block
+                          w-full
+                          px-4
+                          py-2
+                          text-xl
+                          font-normal
+                          text-gray-700
+                          bg-white bg-clip-padding bg-no-repeat
+                          border border-solid border-gray-300
+                          rounded
+                          transition
+                          ease-in-out
+                          m-0
+                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label=".form-select-lg example"
+                id="updatesub"
                 value={newserivce}
                 onChange={(e) => {
                   setAddnew(e.target.value);
                 }}
               >
                 <option selected>સેવા પસંદ કરો</option>
-                <option value="Certificates" data-value="Certificates">
-                  1) પ્રમાણપત્ર
-                </option>
-                <option value="Magisterial" data-value="Magisterial">
-                  2) મેજિસ્ટ્રિયલ
-                </option>
-                <option value="Miscellaneous" data-value="Miscellaneous">
-                  3) વિવિધ
-                </option>
-                <option value="Revenue" data-value="Revenue">
-                  4) આવક
-                </option>
-                <option value="RTI" data-value="RTI">
-                  5) RTI{" "}
-                </option>
-                <option value="Social Security" data-value="Social Security">
-                  6) સામાજિક સુરક્ષા
-                </option>
-                <option value="Supply" data-value="Supply">
-                  7) પુરવઠા
-                </option>
               </select>
             </div>
             <div>
@@ -151,22 +167,22 @@ export default function Updateservice() {
                   </span>
                   <textarea
                     class="
-        form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      "
+                                    form-control
+                                    block
+                                    w-full
+                                    px-3
+                                    py-1.5
+                                    text-base
+                                    font-normal
+                                    text-gray-700
+                                    bg-white bg-clip-padding
+                                    border border-solid border-gray-300
+                                    rounded
+                                    transition
+                                    ease-in-out
+                                    m-0
+                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                                  "
                     id="exampleFormControlTextarea1"
                     rows="3"
                     placeholder="Your message"
