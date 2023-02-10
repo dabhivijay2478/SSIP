@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie";
 export default function Login() {
   const navigate = useNavigate();
   // const notify = () => toast("Sucess Login!");
@@ -20,6 +20,8 @@ export default function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
+      Cookies.set("isLoggedIn", true, { expires: 1 });
+      window.alert("Login")
       navigate("/Dash");
     } catch (err) {
       console.log(err);

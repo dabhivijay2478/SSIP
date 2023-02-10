@@ -1,8 +1,21 @@
-import React from "react";
-
-import { Link, Outlet, NavLink } from "react-router-dom";
-
+import React, { useEffect } from "react";
+import { auth } from "../Firebase";
+import { Link, Outlet, NavLink, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 export default function Dash() {
+  const nav = useNavigate();
+  useEffect(() => {
+    const isLoggedIn = Cookies.get("isLoggedIn");
+    if (!isLoggedIn) {
+      return nav("/");
+    }
+  }, []);
+  const handleLogout = async () => {
+    // await auth().signOut();
+    Cookies.remove("isLoggedIn");
+    window.alert("Log Out");
+    // nav("/")
+  };
   return (
     <>
       <div>
@@ -39,7 +52,7 @@ export default function Dash() {
                   to="/Dash/Addservice"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                  <i class="fa-sharp fa-solid fa-plus"></i>
+                  <i className="fa-sharp fa-solid fa-plus"></i>
                   <span className="ml-3">Add Service</span>
                 </Link>
               </li>
@@ -57,6 +70,7 @@ export default function Dash() {
               <li>
                 <Link
                   to="/"
+                  onClick={handleLogout}
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <i className="fa-solid fa-right-from-bracket"></i>

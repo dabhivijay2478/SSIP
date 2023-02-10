@@ -18,14 +18,14 @@ export default function Addservice() {
       const docRef = await setDoc(doc(colref, subserivce), {
         data,
       });
-      const message = `In ${mainservice} Services New ${subserivce} Service Is Added SuccessFully`;
-      const response = await fetch("/getAccessToken", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message }),
-      });
+      // const message = `In ${mainservice} Services New ${subserivce} Service Is Added SuccessFully`;
+      // const response = await fetch("/getAccessToken", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ message }),
+      // });
 
       window.alert("Sucess Fully Added Service");
       nav("/Dash/Home");

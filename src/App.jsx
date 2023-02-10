@@ -5,12 +5,12 @@ import Home from "./Component/Home";
 import Login from "./Screens/Login";
 import Addservice from "./Component/Addservice";
 import Dash from "./Component/Dash";
-import Updateservice from "./Component/Updateservice";
 import Database from "./Component/Database";
 import Sucesspage from "./Component/Sucesspage";
 import Errorpage from "./Component/Errorpage";
-// import PrivateRoute from "./ProtectedRoute";
+
 function App() {
+
   return (
     <>
       <Routes>
