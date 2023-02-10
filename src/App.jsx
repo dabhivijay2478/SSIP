@@ -8,7 +8,6 @@ import Dash from "./Component/Dash";
 import Updateservice from "./Component/Updateservice";
 import Database from "./Component/Database";
 import Sucesspage from "./Component/Sucesspage";
-import Data from "./Component/Data2";
 import Errorpage from "./Component/Errorpage";
 // import PrivateRoute from "./ProtectedRoute";
 function App() {

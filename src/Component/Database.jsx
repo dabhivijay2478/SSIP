@@ -29,13 +29,14 @@ export default function Database() {
     try {
       const main = mainservice;
       const Sub = dataIdToBeUpdated;
+      // const data = documents.replaceAll("\n", ";");
       const colref = collection(db, main);
       const docRef = await setDoc(doc(colref, Sub), {
         documents,
       });
       console.log("Sucess fully Update", docRef);
       nav("/Dash/Home");
-      const backdrop = document.getElementsByClassName("modal-backdrop");
+     
 
       setAdddocumnet("");
     } catch (e) {
@@ -256,67 +257,45 @@ export default function Database() {
         </div>
         <div>
           <div className="flex flex-col">
-            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <div className="overflow-hidden">
-                  <table className="min-w-full">
-                    <thead className="border-b">
+            <div className="overflow-x-auto">
+              <div className="p-1.5 w-full inline-block align-middle">
+                <div className=" border rounded-lg">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
                       <tr>
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                         >
                           ID
                         </th>
+
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                         >
-                          Data
+                          Document's
                         </th>
+
                         <th
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                          className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                         >
-                          Action
+                          Edit
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-y divide-gray-200">
                       {data.map((item) => (
-                        <tr className="border-b" key={item.id}>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <tr>
+                          <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                             {item.id}
                           </td>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                            <div className="flex justify-center">
-                              <div className="mb-3 xl:w-96">
-                                <textarea
-                                  className="
-                          form-control
-                          block
-                          w-full
-                          px-3
-                          py-1.5
-                          text-base
-                          font-normal
-                          text-gray-700
-                          bg-white bg-clip-padding
-                          border border-solid border-gray-300
-                          rounded
-                          transition
-                          ease-in-out
-                          m-0
-                          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                        "
-                                  rows="3"
-                                >
-                                  {item.documents}
-                                </textarea>
-                              </div>
-                            </div>
+                          <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                            {item.documents}
                           </td>
-                          <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+
+                          <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                             <button
                               type="button"
                               onClick={(e) => {

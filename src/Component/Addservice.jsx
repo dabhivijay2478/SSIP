@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { collection, doc, setDoc } from "firebase/firestore";
+
 import { db } from "../Firebase";
 export default function Addservice() {
   const nav = useNavigate();
@@ -10,15 +11,18 @@ export default function Addservice() {
   const pushdata = async (e) => {
     e.preventDefault();
     const response = await fetch("/gettoken");
+
     console.log(response);
     try {
       const main = mainservice;
       const newse = newserivce;
+      const data = documents.replaceAll("\n", ";");
       const colref = collection(db, main);
       const docRef = await setDoc(doc(colref, newse), {
-        documents,
+        data,
       });
       console.log("Sucess fully Added", docRef);
+      window.alert("Sucess Fully Added Service");
       nav("/Dash/Home");
     } catch (e) {
       console.error("Error adding document: ", e);

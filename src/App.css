@@ -55,9 +55,7 @@ body {
   text-decoration: none;
 }
 
-body {
-  margin: 0 20px;
-}
+
 
 header {
   position: sticky;
@@ -107,6 +105,7 @@ main {
     transition: all .4s ease-in-out;
   }
 }
+
 
 #sidebar {
   --tw-translate-x: -100%;
