@@ -39,7 +39,7 @@ export default function Dash() {
                   to="/Dash/Addservice"
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
-                <i class="fa-sharp fa-solid fa-plus"></i>
+                  <i class="fa-sharp fa-solid fa-plus"></i>
                   <span className="ml-3">Add Service</span>
                 </Link>
               </li>

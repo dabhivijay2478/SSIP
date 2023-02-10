@@ -24,8 +24,7 @@ function App() {
         </Route>
         <Route exact path="/Sucesspage" element={<Sucesspage />} />
         <Route exact path="*" element={<Errorpage />} />
-     
-        </Routes>
+      </Routes>
     </>
   );
 }

@@ -12,7 +12,7 @@ const PrivateRoute = ({
 }) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       isAuthenticated ? (
         <Component {...props} {...rest} />
       ) : (
@@ -21,15 +21,15 @@ const PrivateRoute = ({
     }
   />
 );
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isAuthenticated: !!state.user.uid,
-  isLoading: state.user.isLoading
- });
+  isLoading: state.user.isLoading,
+});
 
 PrivateRoute.propTypes = {
   component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-   isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(PrivateRoute);
