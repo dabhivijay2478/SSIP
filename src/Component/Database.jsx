@@ -26,6 +26,7 @@ export default function Database() {
   }, [data]);
   const updateData = async (e) => {
     e.preventDefault();
+
     try {
       const main = mainservice;
       const Sub = dataIdToBeUpdated;
@@ -34,9 +35,18 @@ export default function Database() {
       const docRef = await setDoc(doc(colref, Sub), {
         documents,
       });
+
+      const message = `In ${mainservice} Services few update is Changes SuccessFully, You Can See ${Sub} Service`;
+      const response = await fetch("/getAccessToken", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+
       console.log("Sucess fully Update", docRef);
       nav("/Dash/Home");
-     
 
       setAdddocumnet("");
     } catch (e) {

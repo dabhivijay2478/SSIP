@@ -6,21 +6,27 @@ import { db } from "../Firebase";
 export default function Addservice() {
   const nav = useNavigate();
   const [mainservice, setAddmain] = useState("સેવા પસંદ કરો");
-  const [newserivce, setAddnew] = useState("");
+  const [subserivce, setAddnew] = useState("");
   const [documents, setAdddocumnet] = useState("");
+
   const pushdata = async (e) => {
     e.preventDefault();
-    const response = await fetch("/gettoken");
 
-    console.log(response);
     try {
-      const main = mainservice;
-      const newse = newserivce;
       const data = documents.replaceAll("\n", ";");
-      const colref = collection(db, main);
-      const docRef = await setDoc(doc(colref, newse), {
+      const colref = collection(db, mainservice);
+      const docRef = await setDoc(doc(colref, subserivce), {
         data,
       });
+      const message = `In ${mainservice} Services New ${subserivce} Service Is Added SuccessFully`;
+      const response = await fetch("/getAccessToken", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
+      console.log(response);
       console.log("Sucess fully Added", docRef);
       window.alert("Sucess Fully Added Service");
       nav("/Dash/Home");
@@ -113,7 +119,7 @@ export default function Addservice() {
                   ease-in-out
                   m-0
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  value={newserivce}
+                  value={subserivce}
                   onChange={(e) => {
                     setAddnew(e.target.value);
                   }}
