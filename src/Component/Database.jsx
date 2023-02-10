@@ -14,6 +14,9 @@ export default function Database() {
 
   const main = mainservice;
 
+  const modifeddata = documents.replaceAll("->", "");
+ 
+  const newdata = modifeddata.replaceAll("\n", ";");
   useEffect(() => {
     const q = query(collection(db, main));
     const data = onSnapshot(q, (querySnapshot) => {
@@ -33,10 +36,8 @@ export default function Database() {
       const Sub = dataIdToBeUpdated;
       // const data = documents.replaceAll("\n", ";");
       const colref = collection(db, main);
-      const docRef = await setDoc(doc(colref, Sub), {
-        documents,
-      });
-
+      //  
+      console.log(newdata);
       // const message = `In ${mainservice} Services few update is Changes SuccessFully, You Can See ${Sub} Service`;
       // const response = await fetch("/getAccessToken", {
       //   method: "POST",
@@ -145,7 +146,7 @@ export default function Database() {
                     <div className="mb-3 xl:w-96">
                       <div>
                         <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                          Enter The New Service
+                          Main service
                         </span>
                         <input
                           type="text"
@@ -171,11 +172,12 @@ export default function Database() {
                           onChange={(e) => {
                             setAddnew(e.target.value);
                           }}
+                          readOnly
                         />
                       </div>
                       <div>
                         <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                          Enter The Sub Service
+                          Sub Service
                         </span>
                         <div>
                           <input
@@ -183,25 +185,26 @@ export default function Database() {
                             id="Sub Service"
                             placeholder="Enter The Sub Service"
                             className="form-input mb-3
-                        appearance-none
-                        block
-                        w-full
-                        px-4
-                        py-2
-                        text-xl
-                        font-normal
-                        text-gray-700
-                        bg-white bg-clip-padding bg-no-repeat
-                        border border-solid border-gray-300
-                        rounded
-                        transition
-                        ease-in-out
-                        m-0
-                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                  appearance-none
+                                  block
+                                  w-full
+                                  px-4
+                                  py-2
+                                  text-xl
+                                  font-normal
+                                  text-gray-700
+                                  bg-white bg-clip-padding bg-no-repeat
+                                  border border-solid border-gray-300
+                                  rounded
+                                  transition
+                                  ease-in-out
+                                  m-0
+                                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                             value={dataIdToBeUpdated}
                             onChange={(e) => {
                               setAddnew(e.target.value);
                             }}
+                            readOnly
                           />
                         </div>
                       </div>
@@ -232,7 +235,9 @@ export default function Database() {
                               id="exampleFormControlTextarea1"
                               rows="3"
                               placeholder="Your message"
-                              value={documents}
+                              value={
+                                "->" + modifeddata.replaceAll("\n", "\n->")
+                              }
                               onChange={(e) => {
                                 setAdddocumnet(e.target.value);
                               }}
@@ -300,11 +305,13 @@ export default function Database() {
                       {data.map((item) => (
                         <tr>
                           <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                            {item.id}
+                            <textarea rows={2} cols={20} readOnly>
+                              {"->" + item.id.replaceAll(";", "\n->")}
+                            </textarea>
                           </td>
 
                           <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                            <textarea rows={10} cols={80}>
+                            <textarea rows={10} cols={80} readOnly>
                               {"->" + item.documents.replaceAll(";", "\n->")}
                             </textarea>
                           </td>
@@ -314,7 +321,9 @@ export default function Database() {
                               type="button"
                               onClick={(e) => {
                                 setDataIdToBeUpdated(item.id);
-                                setAdddocumnet(item.documents);
+                                setAdddocumnet(
+                                  "->" + item.documents.replaceAll(";", "\n->")
+                                );
                               }}
                               className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                               data-bs-toggle="modal"
