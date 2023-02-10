@@ -10,6 +10,7 @@ export default function Database() {
   const [newserivce, setAddnew] = useState("");
   const [documents, setAdddocumnet] = useState("");
   const [dataIdToBeUpdated, setDataIdToBeUpdated] = useState("");
+  const [fetchdoc, setFetchdoc] = useState("");
 
   const main = mainservice;
 
@@ -36,14 +37,14 @@ export default function Database() {
         documents,
       });
 
-      const message = `In ${mainservice} Services few update is Changes SuccessFully, You Can See ${Sub} Service`;
-      const response = await fetch("/getAccessToken", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message }),
-      });
+      // const message = `In ${mainservice} Services few update is Changes SuccessFully, You Can See ${Sub} Service`;
+      // const response = await fetch("/getAccessToken", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ message }),
+      // });
 
       console.log("Sucess fully Update", docRef);
       nav("/Dash/Home");
@@ -269,7 +270,7 @@ export default function Database() {
           <div className="flex flex-col">
             <div className="overflow-x-auto">
               <div className="p-1.5 w-full inline-block align-middle">
-                <div className=" border rounded-lg">
+                <div className="  rounded-lg">
                   <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                       <tr>
@@ -301,8 +302,11 @@ export default function Database() {
                           <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
                             {item.id}
                           </td>
+
                           <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                            {item.documents}
+                            <textarea rows={10} cols={80}>
+                              {"->" + item.documents.replaceAll(";", "\n->")}
+                            </textarea>
                           </td>
 
                           <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">

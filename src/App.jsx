@@ -8,6 +8,7 @@ import Dash from "./Component/Dash";
 import Database from "./Component/Database";
 import Sucesspage from "./Component/Sucesspage";
 import Errorpage from "./Component/Errorpage";
+import Loadanimation from "./Component/Loadanimation";
 
 function App() {
 
@@ -15,10 +16,12 @@ function App() {
     <>
       <Routes>
         <Route exact path="/" element={<Login />} />
-
+        
+        
         <Route exact path="/Dash" element={<Dash />}>
-          <Route exact path="" element={<Home />} />
-          <Route exact path="Home" element={<Home />} />
+        <Route exact path="an" element={<Home />} />
+        <Route exact path="" element={<Home />} />
+        <Route exact path="Home" element={<Loadanimation />} />
           <Route exact path="Addservice" element={<Addservice />} />
           <Route exact path="Database" element={<Database />} />
         </Route>
