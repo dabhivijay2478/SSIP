@@ -26,8 +26,7 @@ export default function Addservice() {
         },
         body: JSON.stringify({ message }),
       });
-      console.log(response);
-      console.log("Sucess fully Added", docRef);
+
       window.alert("Sucess Fully Added Service");
       nav("/Dash/Home");
     } catch (e) {
