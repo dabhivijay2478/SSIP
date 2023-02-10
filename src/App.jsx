@@ -17,6 +17,7 @@ function App() {
         <Route exact path="/" element={<Login />} />
 
         <Route exact path="/Dash" element={<Dash />}>
+          <Route exact path="" element={<Home />} />
           <Route exact path="Home" element={<Home />} />
           <Route exact path="Addservice" element={<Addservice />} />
           <Route exact path="Database" element={<Database />} />
