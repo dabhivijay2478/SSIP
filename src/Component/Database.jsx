@@ -81,7 +81,7 @@ export default function Database() {
   return (
     <>
       <div>
-        <span className="text-3xl flex justify-center font-semibold  py-1 px-2  rounded text-violet-600  uppercase last:mr-0 mr-1">
+        <span className="text-3xl flex justify-center font-semibold  py-1 px-2  rounded text-blue-400 uppercase last:mr-0 mr-1">
           ડેટાબેઝ
         </span>
         <div className="max-w-screen-xl   mt-10 mb-10 px-8  gap-8 grid-cols-1 md:grid-cols-2 flex justify-center py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
