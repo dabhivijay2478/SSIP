@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { collection, query, onSnapshot, setDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  onSnapshot,
+  setDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../Firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +17,7 @@ export default function Database() {
   const [subserivce, setAddnew] = useState("");
   const [documents, setAdddocumnet] = useState("");
   const [dataIdToBeUpdated, setDataIdToBeUpdated] = useState("");
-  const [fetchdoc, setFetchdoc] = useState("");
+  const [iddelete, setDeleteid] = useState("");
 
   const modifeddata = documents.replaceAll("->", "");
 
@@ -58,6 +65,19 @@ export default function Database() {
     }
   };
 
+  const removeFromFirestore = async (e) => {
+    // e.preventDefault();
+    try {
+      const docRef = doc(db, mainservice, iddelete);
+
+      const deletedoc = await deleteDoc(docRef);
+      window.alert("Entire Document has been deleted successfully", iddelete);
+      nav("/Dash/Home");
+      console.log("Entire Document has been deleted successfully", deleteDoc);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <>
       <div>
@@ -334,19 +354,15 @@ export default function Database() {
                               Update
                             </button>
                             <button
-                            type="button"
-                            onClick={(e) => {
-                              setDataIdToBeUpdated(item.id);
-                              setAdddocumnet(
-                                "->" + item.documents.replaceAll(";", "\n->")
-                              );
-                            }}
-                            className="inline-block px-6 ml-2 py-2.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModalCenteredScrollable"
-                          >
-                            Delete
-                          </button>
+                              type="button"
+                              onClick={(e) => {
+                                setDeleteid(item.id);
+                                removeFromFirestore();
+                              }}
+                              className="inline-block px-6 ml-2 py-2.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                            >
+                              Delete
+                            </button>
                           </td>
                         </tr>
                       ))}
