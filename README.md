@@ -1,5 +1,5 @@
 jsk_app
-A new Flutter project.
+A new ReactJS  Web application.
 
 Getting Started
 This project is a starting point for a ReactJS application.
