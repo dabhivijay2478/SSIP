@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
-import { auth } from "../Firebase";
-import { Link, Outlet, NavLink, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+
 export default function Dash() {
   const nav = useNavigate();
+
   useEffect(() => {
     const isLoggedIn = Cookies.get("isLoggedIn");
     if (!isLoggedIn) {
       return nav("/");
     }
   }, []);
+  // logout
   const handleLogout = async () => {
-    // await auth().signOut();
     Cookies.remove("isLoggedIn");
-    window.alert("Log Out");
-    // nav("/")
+    window.alert("સફળતાપૂર્વક લોગ આઉટ");
   };
   return (
     <>
@@ -26,7 +26,7 @@ export default function Dash() {
           type="button"
           className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
         >
-          <span className="sr-only">Dashboard</span>
+          <span className="sr-only">ડેશબોર્ડ</span>
           <i class="fa-solid fa-bars"></i>
         </button>
 
@@ -43,7 +43,7 @@ export default function Dash() {
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <i className="fa-solid fa-house"></i>
-                  <span className="ml-3">Home</span>
+                  <span className="ml-3">હોમપેજ</span>
                 </Link>
               </li>
 
@@ -53,7 +53,7 @@ export default function Dash() {
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <i className="fa-sharp fa-solid fa-plus"></i>
-                  <span className="ml-3">Add Service</span>
+                  <span className="ml-3">સેવા ઉમેરો</span>
                 </Link>
               </li>
               <li>
@@ -62,9 +62,7 @@ export default function Dash() {
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <i className="fa-solid fa-database"></i>
-                  <span className="flex-1 ml-3 whitespace-nowrap">
-                    Database
-                  </span>
+                  <span className="flex-1 ml-3 whitespace-nowrap">ડેટાબેઝ</span>
                 </Link>
               </li>
               <li>
@@ -74,7 +72,7 @@ export default function Dash() {
                   className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <i className="fa-solid fa-right-from-bracket"></i>
-                  <span className="flex-1 ml-3 whitespace-nowrap">Log Out</span>
+                  <span className="flex-1 ml-3 whitespace-nowrap">લૉગ આઉટ</span>
                 </Link>
               </li>
             </ul>

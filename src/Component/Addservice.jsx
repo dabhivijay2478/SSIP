@@ -25,33 +25,33 @@ export default function Addservice() {
 
       /// Notification
 
-      // const message = `In ${mainservice} Services New ${subserivce} Service Is Added SuccessFully`;
-      // const response = await fetch("/getAccessToken", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ message }),
-      // });
+      const message = `In ${mainservice} Services New ${subserivce} Service Is Added SuccessFully`;
+      const response = await fetch("/getAccessToken", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
 
-      window.alert("Sucess Fully Added Service");
+      window.alert("સંપૂર્ણ રીતે ઉમેરાયેલ સેવામાં સફળતા");
       nav("/Dash/Home");
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error("દસ્તાવેજ ઉમેરવામાં ભૂલ: ");
     }
   };
 
   return (
     <>
-      <span className="text-3xl flex justify-center font-semibold  py-1 px-2  rounded text-violet-600  uppercase last:mr-0 mr-1">
-        Addservice
+      <span className="text-3xl flex justify-center font-semibold  py-1 px-2  rounded text-blue-400  uppercase last:mr-0 mr-1">
+        સેવા ઉમેરો
       </span>
       <div className="max-w-screen-xl   mt-10 mb-10 px-8  gap-8 grid-cols-1 md:grid-cols-2 flex justify-center py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
         <div className="flex justify-center">
           <div className="mb-3 xl:w-96">
             <div>
               <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                Enter The New Service
+                નવી સેવા દાખલ કરો
               </span>
               <select
                 className="form-select form-select-lg mb-3
@@ -102,13 +102,13 @@ export default function Addservice() {
             </div>
             <div>
               <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                Enter The Sub Service
+                સબ સર્વિસ દાખલ કરો
               </span>
               <div>
                 <input
                   type="text"
                   id="Sub Service"
-                  placeholder="Enter The Sub Service"
+                  placeholder="સબ સર્વિસ દાખલ કરો"
                   className="form-input mb-3
                   appearance-none
                   block
@@ -136,7 +136,7 @@ export default function Addservice() {
               <div className="flex justify-center">
                 <div className="mb-3 xl:w-96">
                   <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                    Enter The Document's
+                    દસ્તાવેજ દાખલ કરો
                   </span>
                   <textarea
                     className="
@@ -157,8 +157,9 @@ export default function Addservice() {
                         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                       "
                     id="exampleFormControlTextarea1"
-                    rows="3"
-                    placeholder="Your message"
+                    rows={3}
+                    cols={50}
+                    placeholder="દસ્તાવેજ દાખલ કરો"
                     value={documents}
                     onChange={(e) => {
                       setAdddocumnet(e.target.value);
@@ -174,7 +175,7 @@ export default function Addservice() {
               >
                 <span class="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
                 <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-blue-600">
-                  Add Service
+                  સેવા ઉમેરો
                 </span>
               </button>
             </div>

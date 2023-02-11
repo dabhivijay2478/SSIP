@@ -47,14 +47,14 @@ export default function Database() {
 
       ///Notification
 
-      // const message = `In ${mainservice} Services few update is Changes SuccessFully, You Can See ${Sub} Service`;
-      // const response = await fetch("/getAccessToken", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ message }),
-      // });
+      const message = `In ${mainservice} Services few update is Changes SuccessFully, You Can See ${Sub} Service`;
+      const response = await fetch("/getAccessToken", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message }),
+      });
 
       window.alert("Update SuccessFully !!");
       nav("/Dash/Home");
@@ -82,14 +82,14 @@ export default function Database() {
     <>
       <div>
         <span className="text-3xl flex justify-center font-semibold  py-1 px-2  rounded text-violet-600  uppercase last:mr-0 mr-1">
-          Database
+          ડેટાબેઝ
         </span>
         <div className="max-w-screen-xl   mt-10 mb-10 px-8  gap-8 grid-cols-1 md:grid-cols-2 flex justify-center py-16 mx-auto bg-gray-100 text-gray-900 rounded-lg shadow-lg">
           <div className="flex justify-center">
             <div className="mb-3 xl:w-96">
               <div>
                 <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                  Select The Service
+                  સેવા પસંદ કરો
                 </span>
                 <select
                   className="form-select form-select-lg mb-3
@@ -150,7 +150,7 @@ export default function Database() {
             aria-modal="true"
             role="dialog"
           >
-            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-auto pointer-events-none">
+            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable relative w-full pointer-events-none">
               <div className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
                 <div className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                   <span className="text-3xl flex justify-center font-semibold  py-1 px-2  rounded text-violet-600  uppercase last:mr-0 mr-1">
@@ -168,12 +168,13 @@ export default function Database() {
                     <div className="mb-3 xl:w-96">
                       <div>
                         <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                          Main service
+                          મુખ્ય સેવા
                         </span>
                         <input
                           type="text"
-                          id="Sub Service"
-                          placeholder="Enter The Sub Service"
+                          id="mainservice"
+                          placeholder="
+                          મુખ્ય સેવા"
                           className="form-input mb-3
                     appearance-none
                     block
@@ -199,13 +200,13 @@ export default function Database() {
                       </div>
                       <div>
                         <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                          Sub Service
+                          પેટા સેવા
                         </span>
                         <div>
                           <input
                             type="text"
-                            id="Sub Service"
-                            placeholder="Enter The Sub Service"
+                            id="SubService"
+                            placeholder="પેટા સેવા"
                             className="form-input mb-3
                                   appearance-none
                                   block
@@ -234,7 +235,7 @@ export default function Database() {
                         <div className="flex justify-center">
                           <div className="mb-3 xl:w-96">
                             <span className="text-lg flex justify-start font-thin   py-1 px-2  rounded text-gray-900 uppercase last:mr-0 mr-1">
-                              Enter The Document's
+                              દસ્તાવેજ અપડેટ કરો
                             </span>
                             <textarea
                               className="
@@ -305,21 +306,21 @@ export default function Database() {
                           scope="col"
                           className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                         >
-                          ID
+                          પેટા સેવા
                         </th>
 
                         <th
                           scope="col"
                           className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
                         >
-                          Document's
+                          દસ્તાવેજ
                         </th>
 
                         <th
                           scope="col"
                           className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                         >
-                          Edit
+                          સંપાદિત કરો
                         </th>
                       </tr>
                     </thead>
@@ -351,17 +352,16 @@ export default function Database() {
                               data-bs-toggle="modal"
                               data-bs-target="#exampleModalCenteredScrollable"
                             >
-                              Update
+                              અપડેટ
                             </button>
                             <button
                               type="button"
                               onClick={(e) => {
-                                setDeleteid(item.id);
-                                removeFromFirestore();
+                                setDeleteid(item.id), removeFromFirestore();
                               }}
                               className="inline-block px-6 ml-2 py-2.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                             >
-                              Delete
+                              કાઢી નાખો
                             </button>
                           </td>
                         </tr>

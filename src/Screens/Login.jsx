@@ -3,9 +3,10 @@ import { auth } from "../Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+
 export default function Login() {
   const navigate = useNavigate();
-  // const notify = () => toast("Sucess Login!");
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -21,7 +22,8 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
       Cookies.set("isLoggedIn", true, { expires: 1 });
-      window.alert("Login")
+
+      window.alert("સફળતાપૂર્વક પ્રવેશ કરો");
       navigate("/Dash");
     } catch (err) {
       console.log(err);
@@ -31,10 +33,10 @@ export default function Login() {
   return (
     <>
       <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-200 text-gray-700">
-        <h1 className="font-bold text-2xl">Welcome Back :)</h1>
+        <h1 className="font-bold text-2xl">વેલકમ બેક એડમિન :)</h1>
         <form className="flex flex-col bg-white rounded shadow-lg p-12 mt-12">
           <label className="font-semibold text-xs" htmlFor="usernameField">
-            Username or Email
+            વપરાશકર્તા નામ અથવા ઇમેઇલ
           </label>
           <input
             className="flex items-center h-12 px-4 w-64 bg-gray-200 mt-2 rounded focus:outline-none focus:ring-2"
@@ -42,9 +44,10 @@ export default function Login() {
             onChange={(e) =>
               setValues((prev) => ({ ...prev, email: e.target.value }))
             }
+            placeholder="વપરાશકર્તા નામ અથવા ઇમેઇલ"
           />
           <label className="font-semibold text-xs mt-3" htmlFor="passwordField">
-            Password
+            પાસવર્ડ
           </label>
 
           <input
@@ -53,12 +56,13 @@ export default function Login() {
             onChange={(e) =>
               setValues((prev) => ({ ...prev, password: e.target.value }))
             }
+            placeholder="પાસવર્ડ"
           />
           <button
             onClick={handlesubmit}
             className="flex items-center justify-center h-12 px-6 w-64 bg-blue-600 mt-8 rounded font-semibold text-sm text-blue-100 hover:bg-blue-700"
           >
-            Login
+            પ્રવેશ કરો
           </button>
         </form>
       </div>
