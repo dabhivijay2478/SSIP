@@ -5,8 +5,10 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 export default function Addservice() {
   const nav = useNavigate();
+  ///set State
+
   const [mainservice, setAddmain] = useState("સેવા પસંદ કરો");
-  const [subserivce, setAddnew] = useState("");
+  const [subserivce, setSub] = useState("");
   const [documents, setAdddocumnet] = useState("");
 
   const pushdata = async (e) => {
@@ -14,10 +16,15 @@ export default function Addservice() {
 
     try {
       const data = documents.replaceAll("\n", ";");
+
+      /// Add Data Firestore
       const colref = collection(db, mainservice);
       const docRef = await setDoc(doc(colref, subserivce), {
-        data,
+        documents: data,
       });
+
+      /// Notification
+
       // const message = `In ${mainservice} Services New ${subserivce} Service Is Added SuccessFully`;
       // const response = await fetch("/getAccessToken", {
       //   method: "POST",
@@ -120,7 +127,7 @@ export default function Addservice() {
                   focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   value={subserivce}
                   onChange={(e) => {
-                    setAddnew(e.target.value);
+                    setSub(e.target.value);
                   }}
                 />
               </div>
@@ -160,12 +167,15 @@ export default function Addservice() {
                 </div>
               </div>
             </div>
-            <div>
+            <div className="flex justify-center">
               <button
                 onClick={pushdata}
-                className="inline-flex items-center justify-center w-full px-8 py-4 text-base font-bold leading-6 text-white bg-indigo-600 border border-transparent rounded-full md:w-auto hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                class="relative  items-center  justify-center inline-block px-5 py-3 overflow-hidden font-medium transition-all bg-blue-600 rounded-full hover:bg-white group"
               >
-                Add
+                <span class="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
+                <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-blue-600">
+                  Add Service
+                </span>
               </button>
             </div>
           </div>

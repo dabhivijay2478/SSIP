@@ -7,18 +7,16 @@ export default function Database() {
   const nav = useNavigate();
   const [data, setData] = useState([]);
   const [mainservice, setAddmain] = useState("સેવા પસંદ કરો");
-  const [newserivce, setAddnew] = useState("");
+  const [subserivce, setAddnew] = useState("");
   const [documents, setAdddocumnet] = useState("");
   const [dataIdToBeUpdated, setDataIdToBeUpdated] = useState("");
   const [fetchdoc, setFetchdoc] = useState("");
 
-  const main = mainservice;
-
   const modifeddata = documents.replaceAll("->", "");
- 
+
   const newdata = modifeddata.replaceAll("\n", ";");
   useEffect(() => {
-    const q = query(collection(db, main));
+    const q = query(collection(db, mainservice));
     const data = onSnapshot(q, (querySnapshot) => {
       const table = [];
       querySnapshot.forEach((doc) => {
@@ -32,12 +30,16 @@ export default function Database() {
     e.preventDefault();
 
     try {
-      const main = mainservice;
-      const Sub = dataIdToBeUpdated;
+      //update
+
       // const data = documents.replaceAll("\n", ";");
-      const colref = collection(db, main);
-      //  
-      console.log(newdata);
+      const colref = collection(db, mainservice);
+      const docRef = await setDoc(doc(colref, dataIdToBeUpdated), {
+        documents: newdata,
+      });
+
+      ///Notification
+
       // const message = `In ${mainservice} Services few update is Changes SuccessFully, You Can See ${Sub} Service`;
       // const response = await fetch("/getAccessToken", {
       //   method: "POST",
@@ -47,7 +49,7 @@ export default function Database() {
       //   body: JSON.stringify({ message }),
       // });
 
-      console.log("Sucess fully Update", docRef);
+      window.alert("Update SuccessFully !!");
       nav("/Dash/Home");
 
       setAdddocumnet("");
@@ -305,7 +307,7 @@ export default function Database() {
                       {data.map((item) => (
                         <tr>
                           <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                            <textarea rows={2} cols={20} readOnly>
+                            <textarea rows={4} cols={20} readOnly>
                               {"->" + item.id.replaceAll(";", "\n->")}
                             </textarea>
                           </td>
@@ -331,6 +333,20 @@ export default function Database() {
                             >
                               Update
                             </button>
+                            <button
+                            type="button"
+                            onClick={(e) => {
+                              setDataIdToBeUpdated(item.id);
+                              setAdddocumnet(
+                                "->" + item.documents.replaceAll(";", "\n->")
+                              );
+                            }}
+                            className="inline-block px-6 ml-2 py-2.5 bg-red-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModalCenteredScrollable"
+                          >
+                            Delete
+                          </button>
                           </td>
                         </tr>
                       ))}
