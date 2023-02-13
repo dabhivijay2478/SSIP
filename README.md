@@ -4,6 +4,27 @@ A new ReactJS  Web application.
 Getting Started
 This project is a starting point for a ReactJS application.
 
+
+Firebase Config File : 
+
+Location of Firebase.js File :
+Your Project Folder -> src -> Firebase.js
+![image](https://user-images.githubusercontent.com/80666494/218511178-8183e63c-c3fb-4d14-bd4f-b6b49b99bbb6.png)
+
+
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+const firebaseConfig = {
+//Your Firebase Config
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore(app);
+export { app, auth, db };
+
+
 ![image](https://user-images.githubusercontent.com/80666494/218243023-2138ce6f-9821-4129-a16a-8c52ff81aad6.png)
 
 
